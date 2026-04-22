@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class CadastrarController {
+
     @GetMapping("/cadastrar")
     @RequestMapping("/cadastrar")
     public String cadastrar() {
