@@ -8,6 +8,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class PainelTecnicoService {
 
@@ -44,6 +46,20 @@ public class PainelTecnicoService {
 
     @Transactional
     public void concluir(Long solicitacaoId){
-        Solicitacao solicitacao = solicitacaoRepository
+        Solicitacao solicitacao = solicitacaoRepository.findById(solicitacaoId).orElseThrow(() -> new RuntimeException("Solicitação nao encontrada. ID: " + solicitacaoId));
+
+        if (solicitacao.getStatus() != Solicitacao.StatusSolicitacao.EM_ANDAMENTO){
+            throw new IlegalStateExcepotion("Esta solicitação não pode ser concluida. Status atual: " + solicitacao.getStatus().getDescricao());
+        }
+        solicitacao.getStatus(Solicitacao.StatusSolicitacao.CONCLUIDO);
+        solicitacaoRepository.save(solicitacao);
+    }
+    public void concluir(Long solicitacaoId){
+        solicitacao.setStatus(Solicitacao.StatusSolicitacao.CONCLUIDO);
+        solicitacaoRepository.save(solicitacao);
+    }
+
+    public Optional<PainelTecnico> buscarPorSolicitacao(Long solicitacaoId){
+        return painelTecnicoRepository.findBySolicitacaoId(solicitacaoId);
     }
 }
