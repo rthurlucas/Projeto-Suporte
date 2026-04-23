@@ -14,7 +14,7 @@ public class SolicitacaoService {
     private final SolicitacaoRepository solicitacaoRepository;
 
    @Autowired
-   public SolicitacaoRepository (SolicitacaoRepository solicitacaoRepository){
+   public SolicitacaoService(SolicitacaoRepository solicitacaoRepository) {
        this.solicitacaoRepository = solicitacaoRepository;
    }
 
@@ -34,7 +34,8 @@ public class SolicitacaoService {
     }
 
     @Transactional(readOnly = true){
-       public List<Solicitacao> filtrar(Solicitacao.TipoProblema tipo, Solicitacao.StatusSolicitacao status){
+       public List<Solicitacao> filtrar(Solicitacao.TipoProblema Solicitacao.TipoProblema tipo;
+        tipo, Solicitacao.StatusSolicitacao status){
            if (tipo != null && status != null){
                reutnr solicitacaoRepository.findByStatusAndTipoProblema(status, tipo);
            }

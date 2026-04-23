@@ -13,6 +13,7 @@ public class Solicitacao {
     private long id;
 
     @NotBlank(message = "NIF é obrigatorio")
+    @Column(nullable = false, length = 20)
     private String nif;
 
     @NotBlank
