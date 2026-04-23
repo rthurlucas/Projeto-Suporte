@@ -6,16 +6,17 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "solicitacao")
+@Table(name = "solicitacoes")
 public class Solicitacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NotBlank(message = "NIF é obrigatorio")
+    @Column(nullable = false, length = 20)
     private String nif;
 
-    @NotBlank
+    @NotBlank(message = "Nome do solicitante é obrigatório")
     @Size(min = 3, max = 100, message = "Nome deve ter entre 3 e 100 caracteres")
     @Column(nullable = false)
     private String nomeSolicitante;
